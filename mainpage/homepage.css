@@ -1,0 +1,24 @@
+#fontbold	{
+	font-weight:bold;
+	font-size: 40px;
+}
+#fontbro	{
+	font-size: 40px;
+}
+textarea {
+	width: 100%; 
+	height: 100%;
+	margin-top:9px;
+}
+#trainer #word	{
+	font-size: 140px;
+	line-height:200px;
+	text-align:center;
+
+}
+#checkbox1	{
+	margin-top:5px;
+}
+.buttonMargin	{
+	margin-top: 5px;
+}
