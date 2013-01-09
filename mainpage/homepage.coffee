@@ -40,8 +40,9 @@ class Controls
     @words
 
   prepareWordsCollection: ->
-    if @parseSelectedOptions().delimiter then words.delimit(options.delimter)
-    if @parseSelectedOptions().reverse then words.reverse()
+    console.log("Prepare words happened")
+    if @parseSelectedOptions().delimiter then @words.delimit("hello")
+    if @parseSelectedOptions().reverse then @words.reverse()
 
   getWordsCollection: ->
     new WordsCollection($("textarea", @el).val().split(" "))
@@ -56,12 +57,12 @@ class Controls
 
   parseSelectedOptions: ->
     {
-      delimter: @getDelimiterOption()
+      delimiter: @getDelimiterOption()
       reverse: @getReverseOption()
     }
 
   getDelimiterOption: ->
-    $("#delimit", @el).hasClass("active") && $("#worddelimiter", @el) 
+    $("#delimit", @el).hasClass("active")
 
   getReverseOption: ->
     $("#backwards", @el).hasClass("active")
@@ -69,11 +70,19 @@ class Controls
 class WordsCollection
   constructor: (@words) ->
 
-  delimit: (delimter) ->
-    @words.join(" #{delimter} ").split(" ")
+  delimit: (delimiter) ->
+    console.log(delimiter)
+    @words = @words.join(" #{delimiter} ").split(" ")
+    console.log(@words)
+  reverse: ->
+    @words.reverse();
+    console.log("Reverse ran")
 
   toArray: ->
     @words
+
+
+
 
 class Trainer
   constructor: ->

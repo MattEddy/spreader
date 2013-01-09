@@ -72,11 +72,12 @@
     };
 
     Controls.prototype.prepareWordsCollection = function() {
+      console.log("Prepare words happened");
       if (this.parseSelectedOptions().delimiter) {
-        words.delimit(options.delimter);
+        this.words.delimit("hello");
       }
       if (this.parseSelectedOptions().reverse) {
-        return words.reverse();
+        return this.words.reverse();
       }
     };
 
@@ -104,13 +105,13 @@
 
     Controls.prototype.parseSelectedOptions = function() {
       return {
-        delimter: this.getDelimiterOption(),
+        delimiter: this.getDelimiterOption(),
         reverse: this.getReverseOption()
       };
     };
 
     Controls.prototype.getDelimiterOption = function() {
-      return $("#delimit", this.el).hasClass("active") && $("#worddelimiter", this.el);
+      return $("#delimit", this.el).hasClass("active");
     };
 
     Controls.prototype.getReverseOption = function() {
@@ -127,8 +128,15 @@
       this.words = words;
     }
 
-    WordsCollection.prototype.delimit = function(delimter) {
-      return this.words.join(" " + delimter + " ").split(" ");
+    WordsCollection.prototype.delimit = function(delimiter) {
+      console.log(delimiter);
+      this.words = this.words.join(" " + delimiter + " ").split(" ");
+      return console.log(this.words);
+    };
+
+    WordsCollection.prototype.reverse = function() {
+      this.words.reverse();
+      return console.log("Reverse ran");
     };
 
     WordsCollection.prototype.toArray = function() {
