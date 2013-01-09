@@ -16,7 +16,7 @@ class Controls
   start: =>
     @isPaused = false
     $("#pause", @el).html("Pause")
-    $(@).trigger("started", [@getWords(), @getInterval()])
+    $(@).trigger("started", [@getWordsArray(), @getInterval()])
 
   pause: ->
     @isPaused = true
@@ -31,31 +31,49 @@ class Controls
   togglePause: (event) =>
     if @isPaused then @resume() else @pause()
 
+  getWordsArray: ->
+    @getWords().toArray()
+
   getWords: ->
-    @checkWordDelimited(@checkBackwards($("textarea", @el).val().split(" "))))
+    @words = @getWordsCollection()
+    @prepareWordsCollection()
+    @words
+
+  prepareWordsCollection: ->
+    if @parseSelectedOptions().delimiter then words.delimit(options.delimter)
+    if @parseSelectedOptions().reverse then words.reverse()
+
+  getWordsCollection: ->
+    new WordsCollection($("textarea", @el).val().split(" "))
 
   getInterval: ->
     60 / parseInt($("#wpm", @el).val()) * 1000
 
-  checkBackwards: (words) ->
-    if $("#backwards").hasClass("active")
-      words.reverse() 
-    else 
-      words
-
-  checkWordDelimited: (words) ->
-    delimitWord = $("#worddelimiter").val()
-    if $("#delimit").hasClass("active")
-      words.join(" #{delimitWord} ").split(" ")
-    else 
-      words
-      
   errorCheckText: (words) ->
-    console.log("ran")
-    for word in words 
+    # have yet to implement
+    for word, i in words
       if word = " " then words = words[i..i]
-    console.log(words)
-  removeBadWords: (words) ->
+
+  parseSelectedOptions: ->
+    {
+      delimter: @getDelimiterOption()
+      reverse: @getReverseOption()
+    }
+
+  getDelimiterOption: ->
+    $("#delimit", @el).hasClass("active") && $("#worddelimiter", @el) 
+
+  getReverseOption: ->
+    $("#backwards", @el).hasClass("active")
+
+class WordsCollection
+  constructor: (@words) ->
+
+  delimit: (delimter) ->
+    @words.join(" #{delimter} ").split(" ")
+
+  toArray: ->
+    @words
 
 class Trainer
   constructor: ->
