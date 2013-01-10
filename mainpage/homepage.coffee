@@ -37,11 +37,11 @@ class Controls
   getWords: ->
     @words = @getWordsCollection()
     @prepareWordsCollection()
+    @words.errorCheck()
     @words
 
   prepareWordsCollection: ->
-    console.log("Prepare words happened")
-    if @parseSelectedOptions().delimiter then @words.delimit("hello")
+    if @parseSelectedOptions().delimiter then @words.delimit($("#worddelimiter", @el).val())
     if @parseSelectedOptions().reverse then @words.reverse()
 
   getWordsCollection: ->
@@ -49,11 +49,6 @@ class Controls
 
   getInterval: ->
     60 / parseInt($("#wpm", @el).val()) * 1000
-
-  errorCheckText: (words) ->
-    # have yet to implement
-    for word, i in words
-      if word = " " then words = words[i..i]
 
   parseSelectedOptions: ->
     {
@@ -77,6 +72,12 @@ class WordsCollection
   reverse: ->
     @words.reverse();
     console.log("Reverse ran")
+
+  errorCheck: ->
+    @approvedWords = [] 
+    @approvedWords.push(word) for word in @words when word 
+    @words = @approvedWords
+    console.log(@words)
 
   toArray: ->
     @words

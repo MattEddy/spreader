@@ -68,13 +68,13 @@
     Controls.prototype.getWords = function() {
       this.words = this.getWordsCollection();
       this.prepareWordsCollection();
+      this.words.errorCheck();
       return this.words;
     };
 
     Controls.prototype.prepareWordsCollection = function() {
-      console.log("Prepare words happened");
       if (this.parseSelectedOptions().delimiter) {
-        this.words.delimit("hello");
+        this.words.delimit($("#worddelimiter", this.el).val());
       }
       if (this.parseSelectedOptions().reverse) {
         return this.words.reverse();
@@ -87,20 +87,6 @@
 
     Controls.prototype.getInterval = function() {
       return 60 / parseInt($("#wpm", this.el).val()) * 1000;
-    };
-
-    Controls.prototype.errorCheckText = function(words) {
-      var i, word, _i, _len, _results;
-      _results = [];
-      for (i = _i = 0, _len = words.length; _i < _len; i = ++_i) {
-        word = words[i];
-        if (word = " ") {
-          _results.push(words = words.slice(i, +i + 1 || 9e9));
-        } else {
-          _results.push(void 0);
-        }
-      }
-      return _results;
     };
 
     Controls.prototype.parseSelectedOptions = function() {
@@ -137,6 +123,20 @@
     WordsCollection.prototype.reverse = function() {
       this.words.reverse();
       return console.log("Reverse ran");
+    };
+
+    WordsCollection.prototype.errorCheck = function() {
+      var word, _i, _len, _ref;
+      this.approvedWords = [];
+      _ref = this.words;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        word = _ref[_i];
+        if (word) {
+          this.approvedWords.push(word);
+        }
+      }
+      this.words = this.approvedWords;
+      return console.log(this.words);
     };
 
     WordsCollection.prototype.toArray = function() {
