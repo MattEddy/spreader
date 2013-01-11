@@ -36,13 +36,14 @@ class Controls
 
   getWords: ->
     @words = @getWordsCollection()
-    @prepareWordsCollection()
     @words.errorCheck()
+    @prepareWordsCollection()
     @words
 
   prepareWordsCollection: ->
     if @parseSelectedOptions().delimiter then @words.delimit($("#worddelimiter", @el).val())
     if @parseSelectedOptions().reverse then @words.reverse()
+    # if @parseSelectedOptions().crayon then $("#trainer").addClass("crayon") else $("#trainer").removeClass("crayon")
 
   getWordsCollection: ->
     new WordsCollection($("textarea", @el).val().split(" "))
@@ -62,22 +63,20 @@ class Controls
   getReverseOption: ->
     $("#backwards", @el).hasClass("active")
 
+
 class WordsCollection
   constructor: (@words) ->
 
   delimit: (delimiter) ->
-    console.log(delimiter)
     @words = @words.join(" #{delimiter} ").split(" ")
-    console.log(@words)
+
   reverse: ->
     @words.reverse();
-    console.log("Reverse ran")
 
   errorCheck: ->
     @approvedWords = [] 
     @approvedWords.push(word) for word in @words when word 
     @words = @approvedWords
-    console.log(@words)
 
   toArray: ->
     @words
@@ -88,12 +87,18 @@ class WordsCollection
 class Trainer
   constructor: ->
     @el = $("#trainer")
-
+    @colors = ["greenColor", "redColor", "tealColor","purpleColor","yellowColor","blueColor","maroonColor"]
   start: (words, interval) ->
+
+
     clearInterval(@interval) if @interval
     @currentWordIndex = 0
+    
     @words = words
+    @endingIndex = @words.length
+
     @interval = setInterval(@displayNextWord, interval)
+
 
   pause: ->
     clearInterval(@interval)
@@ -103,6 +108,20 @@ class Trainer
 
   displayNextWord: =>
     $("#word", @el).html(@words[@currentWordIndex])
+    
+
+    if @words[@currentWordIndex].toUpperCase() == "CAPITALISM"
+      $("#colorSelector").removeClass()
+      $("#colorSelector").addClass("redColor")
+    else 
+      if  $("#crayon").hasClass("active") 
+        $("#colorSelector").removeClass()
+        $("#colorSelector").addClass(@colors[Math.floor(Math.random() * 7)])
+        $("#trainer").addClass("crayon")
+      else
+        $("#colorSelector").removeClass()
+        $("#trainer").removeClass("crayon")
+
     @currentWordIndex += 1
 
 

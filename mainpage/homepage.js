@@ -67,8 +67,8 @@
 
     Controls.prototype.getWords = function() {
       this.words = this.getWordsCollection();
-      this.prepareWordsCollection();
       this.words.errorCheck();
+      this.prepareWordsCollection();
       return this.words;
     };
 
@@ -115,14 +115,11 @@
     }
 
     WordsCollection.prototype.delimit = function(delimiter) {
-      console.log(delimiter);
-      this.words = this.words.join(" " + delimiter + " ").split(" ");
-      return console.log(this.words);
+      return this.words = this.words.join(" " + delimiter + " ").split(" ");
     };
 
     WordsCollection.prototype.reverse = function() {
-      this.words.reverse();
-      return console.log("Reverse ran");
+      return this.words.reverse();
     };
 
     WordsCollection.prototype.errorCheck = function() {
@@ -135,8 +132,7 @@
           this.approvedWords.push(word);
         }
       }
-      this.words = this.approvedWords;
-      return console.log(this.words);
+      return this.words = this.approvedWords;
     };
 
     WordsCollection.prototype.toArray = function() {
@@ -152,6 +148,7 @@
     function Trainer() {
       this.displayNextWord = __bind(this.displayNextWord, this);
       this.el = $("#trainer");
+      this.colors = ["greenColor", "redColor", "tealColor", "purpleColor", "yellowColor", "blueColor", "maroonColor"];
     }
 
     Trainer.prototype.start = function(words, interval) {
@@ -160,6 +157,7 @@
       }
       this.currentWordIndex = 0;
       this.words = words;
+      this.endingIndex = this.words.length;
       return this.interval = setInterval(this.displayNextWord, interval);
     };
 
@@ -173,6 +171,19 @@
 
     Trainer.prototype.displayNextWord = function() {
       $("#word", this.el).html(this.words[this.currentWordIndex]);
+      if (this.words[this.currentWordIndex].toUpperCase() === "CAPITALISM") {
+        $("#colorSelector").removeClass();
+        $("#colorSelector").addClass("redColor");
+      } else {
+        if ($("#crayon").hasClass("active")) {
+          $("#colorSelector").removeClass();
+          $("#colorSelector").addClass(this.colors[Math.floor(Math.random() * 7)]);
+          $("#trainer").addClass("crayon");
+        } else {
+          $("#colorSelector").removeClass();
+          $("#trainer").removeClass("crayon");
+        }
+      }
       return this.currentWordIndex += 1;
     };
 
