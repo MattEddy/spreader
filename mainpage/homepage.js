@@ -67,9 +67,11 @@
 
     Controls.prototype.getWords = function() {
       this.words = this.getWordsCollection();
-      this.words.errorCheck();
-      this.prepareWordsCollection();
-      return this.words;
+      console.log(this.words);
+      if (this.words.errorCheck()) {
+        this.prepareWordsCollection();
+        return this.words;
+      }
     };
 
     Controls.prototype.prepareWordsCollection = function() {
@@ -122,7 +124,16 @@
       return this.words.reverse();
     };
 
+    WordsCollection.prototype.toArray = function() {
+      return this.words;
+    };
+
     WordsCollection.prototype.errorCheck = function() {
+      this.checkWords();
+      return this.checkFields();
+    };
+
+    WordsCollection.prototype.checkWords = function() {
       var word, _i, _len, _ref;
       this.approvedWords = [];
       _ref = this.words;
@@ -135,8 +146,43 @@
       return this.words = this.approvedWords;
     };
 
-    WordsCollection.prototype.toArray = function() {
-      return this.words;
+    WordsCollection.prototype.checkFields = function() {
+      var WPM, delimitWord, goodToGo, textArea;
+      delimitWord = $("#worddelimiter", this.el).val();
+      WPM = "" + $("#wpm", this.el).val();
+      textArea = $("textarea", this.el).val();
+      goodToGo = true;
+      if ($("#delimit", this.el).hasClass("active")) {
+        if (delimitWord.replace(/\s+$/g, ' ') === "") {
+          goodToGo = false;
+          this.alertUser("Woah buddy,", "Add Word Delimiter is toggled. You need to add a word to use as a delimiter if you want this to function. Also you're a horrible person.");
+        }
+      }
+      if (WPM.replace(/\s+$/g, ' ') === "") {
+        goodToGo = false;
+        this.alertUser("Woah friend,", "You need to enter how many words per minute you want this thing to run at. Also your wife tastes like honey nut cherrios.");
+      }
+      if (isNaN(WPM)) {
+        goodToGo = false;
+        this.alertUser("Woah champ,", "You need to enter a number in words per minute, not a fucking symbol. Also all your lovers find your performance to be sub par.");
+      }
+      if (WPM < 1) {
+        goodToGo = false;
+        this.alertUser("Woah guy,", "You need to enter a number greater than 1 in words per minute. Also there is no meaning in the universe.");
+      }
+      if (textArea.replace(/\s+$/g, ' ') === "") {
+        goodToGo = false;
+        this.alertUser("Woah dude,", "You need to enter some text to read. Also you dress like a rube.");
+      }
+      return goodToGo;
+    };
+
+    WordsCollection.prototype.alertUser = function(header, alertMessage) {
+      $("#message").remove();
+      return $("#messageContainer").append('<div class="alert alert-block alert-error fade in" id="message"><button type="button" class="close" data-dismiss="alert">×</button>\
+            <h4 class="alert-heading">' + header + '</h4>\
+            <p>' + alertMessage + '</p>\
+            </div>');
     };
 
     return WordsCollection;
@@ -171,6 +217,9 @@
 
     Trainer.prototype.displayNextWord = function() {
       $("#word", this.el).html(this.words[this.currentWordIndex]);
+      if (this.currentWordIndex === this.words.length) {
+        clearInterval(this.interval);
+      }
       if (this.words[this.currentWordIndex].toUpperCase() === "CAPITALISM") {
         $("#colorSelector").removeClass();
         $("#colorSelector").addClass("redColor");
