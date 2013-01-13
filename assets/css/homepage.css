@@ -10,11 +10,12 @@ textarea {
   width: 100%;
   height: 100%;
   margin-top:9px;
+  margin-bottom: 15px;
 }
 @font-face {
   font-family: 'CHILD';
-  src: url('../assets/CHILD.eot');
-  src: local('CHILD'), local('CHILD'), url('../assets/CHILD.ttf') format('truetype');
+  src: url('../../vendor/assets/CHILD.eot');
+  src: local('CHILD'), local('CHILD'), url('../../vendor/assets/CHILD.ttf') format('truetype');
 }
 #trainer #word  {
   font-size: 140px;
@@ -26,6 +27,10 @@ textarea {
 }
 .buttonMargin {
   margin-top: 5px;
+  display: block;
+}
+.instructions {
+  margin-top: 15px;
 }
 .crayon {
   font-family: CHILD;

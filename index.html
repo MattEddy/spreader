@@ -26,51 +26,37 @@
   </head>
 
   <body>
-
-
     <div class="container">
       <div class="row">
-          <div class="span12" id="trainer">
-                        <div class="blue" id="colorSelector">
-              <div id="word">&nbsp;</div>
-                        </div>
-            </div>
-        <div class="span12" id="controls">
-          <button class="btn btn-primary" type="submit" id="start">
-            Start
-          </button>
+        <div class="span12" id="trainer">
+          <div class="blue" id="colorSelector">
+            <div id="word">Spreader</div>
+          </div>
+        </div>
 
+        <div class="span12" id="controls">
+          <button class="btn btn-primary" type="submit" id="start">Start</button>
           <input class="input-mini" type="text" placeholder="WPM" id="wpm">
-          <button class="btn btn-primary" type="submit" id="pause">
-            Pause
-          </button>
+          <button class="btn btn-primary" type="submit" id="pause">Pause</button>
           <textarea id="textarea" rows="10" placeholder="Enter Text Here"></textarea>
-                    <br>
-                    <br>
           <button class="btn btn-primary" data-toggle="button" type="button" id="delimit">Add Word Delimiiter</button>
           <input class="input-mini" type="text" placeholder="word" id="worddelimiter">
-          <br>
           <button class="btn btn-primary buttonMargin" data-toggle="button" type="button" id="backwards">Read Backwards</button>
-                    <br>
-                    <button class="btn btn-primary buttonMargin" data-toggle="button" type="button" id="crayon">Crayon Mode</button>
-
-
+          <button class="btn btn-primary buttonMargin" data-toggle="button" type="button" id="crayon">Crayon Mode</button>
         </div>
-
       </div>
     </div>
-    <br>
+
     <div class="container instructions">
-        <div class="row">
-            <div class="span12" id="messageContainer">
-                <div class="alert fade in" id="message">
-                    <button type="bootstrap-button" class="close" data-dismiss="alert">×</button>
-                        <strong>Instructions:</strong>
-                        <br>
-                        Add the desired words per minute in the text box that says WPM. You can toggle word delimiter and add a word to have each word of the text spaced using the chosen delimiter. Toggle read backwards to have the text read forwards.
-                </div>
-            </div>
+      <div class="row">
+        <div class="span12" id="messageContainer">
+          <div class="alert fade in" id="message">
+            <button type="bootstrap-button" class="close" data-dismiss="alert">×</button>
+            <h3>Instructions:</h3>
+            Add the desired words per minute in the text box that says WPM. You can toggle word delimiter and add a word to have each word of the text spaced using the chosen delimiter. Toggle read backwards to have the text read forwards.
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Le javascript
