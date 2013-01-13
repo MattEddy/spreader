@@ -16,4 +16,4 @@ Then visit localhost:3000.
 
 `cd` into the project's root directory.
 
-  coffee --watch --compile assets/js/homepage.coffee
+  coffee --watch --compile assets/js/*.coffee
