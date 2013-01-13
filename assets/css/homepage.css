@@ -1,0 +1,53 @@
+//padding-top: 100px; /* 60px to make the container go all the way to the bottom of the topbar */
+#fontbold {
+  font-weight:bold;
+  font-size: 40px;
+}
+#fontbro  {
+  font-size: 40px;
+}
+textarea {
+  width: 100%;
+  height: 100%;
+  margin-top:9px;
+}
+@font-face {
+  font-family: 'CHILD';
+  src: url('../assets/CHILD.eot');
+  src: local('CHILD'), local('CHILD'), url('../assets/CHILD.ttf') format('truetype');
+}
+#trainer #word  {
+  font-size: 140px;
+  line-height:200px;
+  text-align:center;
+}
+#checkbox1  {
+  margin-top:5px;
+}
+.buttonMargin {
+  margin-top: 5px;
+}
+.crayon {
+  font-family: CHILD;
+}
+.greenColor {
+  color: green;
+}
+.redColor {
+  color: red;
+}
+.purpleColor  {
+  color: purple;
+}
+.yellowColor  {
+  color: yellow;
+}
+.tealColor  {
+  color: teal;
+}
+.blueColor  {
+  color: blue;
+}
+.maroonColor {
+  color: maroon;
+}
