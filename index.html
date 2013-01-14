@@ -41,24 +41,31 @@
                         </div>
 				    </div>
 				<div class="span12" id="controls">
-					<button class="btn btn-primary" type="submit" id="start">
-					  Start
-					</button>
-					
-					<input class="input-mini" type="text" placeholder="WPM" id="wpm">
-					<button class="btn btn-primary" type="submit" id="pause">
-					  Pause
-					</button>
-					<textarea id="textarea" rows="10" placeholder="Enter Text Here"></textarea>
+                    <div id="WPMcontrols" class="control-group">
+    					<button class="btn btn-primary" type="submit" id="start">
+    					  Start
+    					</button>
+    					
+    					<input class="input-mini" type="text" placeholder="WPM" id="wpm" value="100">
+    					<button class="btn btn-primary" type="submit" id="pause">
+    					  Pause
+    					</button>
+                    </div>
+                    <div id="textareaControls" class="control-group">
+					<textarea id="textarea" rows="10" placeholder="Enter Text Here">Hello World hows it  going</textarea>
+                    </div>
                     <br>
                     <br>
-					<button class="btn btn-primary" data-toggle="button" type="button" id="delimit">Add Word Delimiiter</button>
-					<input class="input-mini" type="text" placeholder="word" id="worddelimiter">
-					<br>
-					<button class="btn btn-primary buttonMargin" data-toggle="button" type="button" id="backwards">Read Backwards</button>
-                    <br>
-                    <button class="btn btn-primary buttonMargin" data-toggle="button" type="button" id="crayon">Crayon Mode</button>
-
+                    <div id="delimitControl" class="control-group">
+    					<button class="btn btn-primary" data-toggle="button" type="button" id="delimit">Add Word Delimiiter</button>
+    					<input class="input-mini" type="text" placeholder="word" id="worddelimiter">
+					</div>
+                    <div class="control-group">
+					   <button class="btn btn-primary" data-toggle="button" type="button" id="backwards">Read Backwards</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" data-toggle="button" type="button" id="crayon">Crayon Mode</button>
+                    </div>
 
 				</div>
 
